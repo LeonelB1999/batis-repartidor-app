@@ -1,4 +1,4 @@
-package com.cevicheria.batis;
+package com.batis.repartidor;
 
 import com.getcapacitor.BridgeActivity;
 

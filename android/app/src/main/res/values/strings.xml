@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">CevicheriaBatis</string>
-    <string name="title_activity_main">CevicheriaBatis</string>
-    <string name="package_name">com.cevicheria.batis</string>
-    <string name="custom_url_scheme">com.cevicheria.batis</string>
+    <string name="app_name">Al Toque Repartidor</string>
+    <string name="title_activity_main">Al Toque Repartidor</string>
+    <string name="package_name">com.batis.repartidor</string>
+    <string name="custom_url_scheme">com.batis.repartidor</string>
 </resources>
