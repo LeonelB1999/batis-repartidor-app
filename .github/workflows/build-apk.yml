@@ -32,6 +32,11 @@ jobs:
             sed -i 's/\(release {\)/\1\n            signingConfig signingConfigs.debug/' app/build.gradle
           fi
           ./gradlew assembleRelease
+      - name: Upload APK (artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: APK
+          path: android/app/build/outputs/apk/release/*.apk
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
