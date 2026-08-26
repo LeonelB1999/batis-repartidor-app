@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0f0f1a">
+  <title>Cevichería Batis - POS</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%; height: 100%;
+      background: #0f0f1a;
+      color: #94a3b8;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .loading { text-align: center; }
+    .spinner {
+      width: 32px; height: 32px;
+      border: 3px solid rgba(99,102,241,0.2);
+      border-top-color: #6366f1;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 12px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .text { font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <div class="loading">
+    <div class="spinner"></div>
+    <div class="text">Cargando POS...</div>
+  </div>
+  <script>
+    // POS direct URL
+    var posUrl = 'http://129.159.90.187/pos.html';
+    
+    // Try direct navigation
+    window.location.replace(posUrl);
+    
+    // Fallback if replace fails
+    setTimeout(function() {
+      if (window.location.href.indexOf('pos.html') === -1) {
+        window.location.href = posUrl;
+      }
+    }, 3000);
+  </script>
+</body>
+</html>

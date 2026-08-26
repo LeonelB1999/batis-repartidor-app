@@ -1,0 +1,37 @@
+{
+  "appId": "com.batis.repartidor",
+  "appName": "Al Toque Repartidor",
+  "webDir": "dist",
+  "server": {
+    "url": "http://129.159.90.187:8080/app-delivery/",
+    "cleartext": true,
+    "allowNavigation": [
+      "129.159.90.187",
+      "*.129.159.90.187"
+    ],
+    "androidScheme": "http"
+  },
+  "android": {
+    "allowMixedContent": true,
+    "captureInput": true,
+    "hardwareAcceleration": true
+  },
+  "ios": {
+    "preferredContentMode": "mobile"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0,
+      "launchAutoHide": true,
+      "backgroundColor": "#0f0f1a",
+      "androidScaleType": "CENTER_CROP",
+      "showSpinner": false,
+      "splashImmersive": true
+    },
+    "StatusBar": {
+      "overlaysWebView": true,
+      "backgroundColor": "#00000000",
+      "style": "DARK"
+    }
+  }
+}

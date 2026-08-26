@@ -1,0 +1,43 @@
+name: Build APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Sync Capacitor
+        run: npx cap sync android
+      - name: Build APK release
+        run: |
+          cd android
+          if ! grep -q 'signingConfig signingConfigs.debug' app/build.gradle; then
+            sed -i 's/\(release {\)/\1\n            signingConfig signingConfigs.debug/' app/build.gradle
+          fi
+          ./gradlew assembleRelease
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: android/app/build/outputs/apk/release/*.apk
+          tag_name: v${{ github.run_number }}
+          name: APK v${{ github.run_number }}
+          body: APK generado automáticamente (carga la web en vivo).
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
