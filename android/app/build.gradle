@@ -4,7 +4,7 @@ android {
     namespace = "com.batis.repartidor"
     compileSdk = rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.batis.repartidor"
+        applicationId "com.batis.altoque.repartidor"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 4
