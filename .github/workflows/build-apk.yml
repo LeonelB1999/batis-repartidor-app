@@ -25,12 +25,21 @@ jobs:
         run: npm install
       - name: Sync Capacitor
         run: npx cap sync android
+      - name: Configurar firma estable (keystore desde Secrets)
+        env:
+          BATIS_KEYSTORE: ${{ secrets.BATIS_KEYSTORE }}
+          BATIS_STORE_PASS: ${{ secrets.BATIS_STORE_PASS }}
+          BATIS_KEY_ALIAS: ${{ secrets.BATIS_KEY_ALIAS }}
+          BATIS_KEY_PASS: ${{ secrets.BATIS_KEY_PASS }}
+        run: |
+          echo "$BATIS_KEYSTORE" | base64 -d > android/batis-release.keystore
+          echo "storeFile=../batis-release.keystore" > android/keystore.properties
+          echo "storePassword=$BATIS_STORE_PASS" >> android/keystore.properties
+          echo "keyAlias=$BATIS_KEY_ALIAS" >> android/keystore.properties
+          echo "keyPassword=$BATIS_KEY_PASS" >> android/keystore.properties
       - name: Build APK release
         run: |
           cd android
-          if ! grep -q 'signingConfig signingConfigs.debug' app/build.gradle; then
-            sed -i 's/\(release {\)/\1\n            signingConfig signingConfigs.debug/' app/build.gradle
-          fi
           ./gradlew assembleRelease
       - name: Upload APK (artifact)
         uses: actions/upload-artifact@v4
